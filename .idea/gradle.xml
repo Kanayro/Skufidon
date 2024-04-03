@@ -22,11 +22,6 @@
                   <project path="$PROJECT_DIR$/auth-service" />
                 </projects>
               </build>
-              <build path="$PROJECT_DIR$/data-access" name="data-access">
-                <projects>
-                  <project path="$PROJECT_DIR$/data-access" />
-                </projects>
-              </build>
               <build path="$PROJECT_DIR$/eureka-server" name="eureka-server">
                 <projects>
                   <project path="$PROJECT_DIR$/eureka-server" />
@@ -48,7 +43,6 @@
             <option value="$PROJECT_DIR$/api-gateway" />
             <option value="$PROJECT_DIR$/appearance-service" />
             <option value="$PROJECT_DIR$/auth-service" />
-            <option value="$PROJECT_DIR$/data-access" />
             <option value="$PROJECT_DIR$/eureka-server" />
             <option value="$PROJECT_DIR$/requirement-service" />
           </set>
@@ -83,14 +77,6 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/auth-service" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/data-access" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/data-access" />
           </set>
         </option>
       </GradleProjectSettings>
