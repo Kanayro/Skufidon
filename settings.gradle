@@ -1,0 +1,9 @@
+rootProject.name = 'skuf-cloud'
+
+includeBuild 'eureka-server'
+includeBuild 'api-gateway'
+includeBuild 'data-access'
+includeBuild 'auth-service'
+includeBuild 'appearance-service'
+includeBuild 'requirement-service'
+
