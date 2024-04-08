@@ -88,11 +88,9 @@ public class AppearanceController {
     }
 
 
-    @GetMapping("/get")
-    public AppearanceDTO getAppearance(HttpServletRequest request){
-        JWTDTO jwtdto = jwtUtil.validateTokenAndRetrieveClaim(jwtUtil.getJWT(request));
-        return mapper.mapToAppearanceDTO(appearanceService.get(jwtdto.getId()));
-
+    @GetMapping("/{id}")
+    public AppearanceDTO getAppearance(@PathVariable("id") int id){
+        return mapper.mapToAppearanceDTO(appearanceService.get(id));
 
     }
 
