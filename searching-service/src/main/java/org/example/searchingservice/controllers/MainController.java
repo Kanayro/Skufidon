@@ -3,7 +3,9 @@ package org.example.searchingservice.controllers;
 import jakarta.servlet.http.HttpServletRequest;
 import org.example.searchingservice.dto.AppearanceDTO;
 import org.example.searchingservice.dto.JWTDTO;
+import org.example.searchingservice.dto.RequirementDTO;
 import org.example.searchingservice.requests.AppearanceRequest;
+import org.example.searchingservice.requests.RequirementRequest;
 import org.example.searchingservice.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,20 +22,24 @@ public class MainController {
 
     private final JWTUtil jwtUtil;
     private final AppearanceRequest appearanceRequest;
+    private final RequirementRequest requirementRequest;
 
     @Autowired
-    public MainController(JWTUtil jwtUtil, AppearanceRequest appearanceRequest) {
+    public MainController(JWTUtil jwtUtil, AppearanceRequest appearanceRequest, RequirementRequest requirementRequest) {
         this.jwtUtil = jwtUtil;
         this.appearanceRequest = appearanceRequest;
+        this.requirementRequest = requirementRequest;
     }
 
     @GetMapping("/get")
-    public AppearanceDTO getCapacity(HttpServletRequest request){
+    public List<AppearanceDTO> getCapacity(HttpServletRequest request){
         JWTDTO jwtdto = jwtUtil.validateTokenAndRetrieveClaim(jwtUtil.getJWT(request));
 
-        AppearanceDTO appearanceDTO = appearanceRequest.getAppearance(jwtdto.getId());
+        RequirementDTO requirementDTO = requirementRequest.getRequirement(jwtdto.getId());
+        List<AppearanceDTO> appearanceDTOList = appearanceRequest.findAllBySex(requirementDTO.getSex());
 
-        return appearanceDTO;
+
+        return appearanceDTOList;
 
     }
 

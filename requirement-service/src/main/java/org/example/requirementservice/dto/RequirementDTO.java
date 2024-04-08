@@ -12,13 +12,7 @@ public class RequirementDTO {
 
     private int client_id;
 
-    public RequirementDTO(String sex, int age, String address, String hair_color, int client_id) {
-        this.sex = sex;
-        this.age = age;
-        this.address = address;
-        this.hair_color = hair_color;
-        this.client_id = client_id;
-    }
+
 
     public String getSex() {
         return sex;

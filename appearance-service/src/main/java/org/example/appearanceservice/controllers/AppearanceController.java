@@ -1,5 +1,6 @@
 package org.example.appearanceservice.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.example.appearanceservice.dto.AppearanceDTO;
@@ -95,13 +96,13 @@ public class AppearanceController {
 
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/findAll")
     public List<AppearanceDTO> findAll(){
         return appearanceService.findAll().stream().map(mapper::mapToAppearanceDTO).collect(Collectors.toList());
     }
 
-    @PostMapping("/getAll")
-    public List<AppearanceDTO> findAllBySex(@RequestBody String sex){
+    @GetMapping("/getAll")
+    public List<AppearanceDTO> findAllBySex(@RequestParam("sex") String sex){
         return appearanceService.findAllBySex(sex).stream().map(mapper::mapToAppearanceDTO).collect(Collectors.toList());
     }
 

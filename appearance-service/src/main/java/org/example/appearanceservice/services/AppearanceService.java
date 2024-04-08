@@ -54,7 +54,11 @@ public class AppearanceService {
     }
 
     public List<Appearance> findAllBySex(String sex){
-        return appearanceRepository.findAllBySex(sex);
+        System.out.println(sex);
+        List<Appearance> appearances = appearanceRepository.findAllBySex(sex);
+
+        System.out.println(appearances);
+        return appearances;
     }
 
 
