@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -46,6 +47,14 @@ public class AppearanceService {
     public Appearance get(int client_id){
         Optional<Appearance> appearance = appearanceRepository.findByClient(client_id);
         return appearance.orElseThrow(AppearanceNotFoundException::new);
+    }
+
+    public List<Appearance> findAll(){
+        return appearanceRepository.findAll();
+    }
+
+    public List<Appearance> findAllBySex(String sex){
+        return appearanceRepository.findAllBySex(sex);
     }
 
 

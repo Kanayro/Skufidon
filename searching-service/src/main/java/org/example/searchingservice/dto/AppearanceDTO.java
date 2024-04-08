@@ -75,4 +75,17 @@ public class AppearanceDTO {
     public void setClient_id(int client_id) {
         this.client_id = client_id;
     }
+
+    @Override
+    public String toString() {
+        return "AppearanceDTO{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", sex='" + sex + '\'' +
+                ", age=" + age +
+                ", address='" + address + '\'' +
+                ", hair_color='" + hair_color + '\'' +
+                ", client_id=" + client_id +
+                '}';
+    }
 }

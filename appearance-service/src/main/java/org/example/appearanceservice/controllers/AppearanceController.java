@@ -20,6 +20,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/appearance")
@@ -92,6 +93,16 @@ public class AppearanceController {
     public AppearanceDTO getAppearance(@PathVariable("id") int id){
         return mapper.mapToAppearanceDTO(appearanceService.get(id));
 
+    }
+
+    @GetMapping("/getAll")
+    public List<AppearanceDTO> findAll(){
+        return appearanceService.findAll().stream().map(mapper::mapToAppearanceDTO).collect(Collectors.toList());
+    }
+
+    @PostMapping("/getAll")
+    public List<AppearanceDTO> findAllBySex(@RequestBody String sex){
+        return appearanceService.findAllBySex(sex).stream().map(mapper::mapToAppearanceDTO).collect(Collectors.toList());
     }
 
 

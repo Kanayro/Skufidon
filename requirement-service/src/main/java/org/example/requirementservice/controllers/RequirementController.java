@@ -92,6 +92,11 @@ public class RequirementController {
 
     }
 
+    @GetMapping("/{id}")
+    public RequirementDTO getRequirementByClient(@PathVariable("id") int id){
+        return mapper.mapToRequirementDTO(service.getRequirement(id));
+    }
+
 
 
 
