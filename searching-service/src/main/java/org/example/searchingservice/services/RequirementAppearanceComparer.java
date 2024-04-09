@@ -15,9 +15,9 @@ public class RequirementAppearanceComparer {
 
         if(requirementDTO.getAge()<=appearanceDTO.getAge()+1 && requirementDTO.getAge()>=appearanceDTO.getAge()-1 ){
 
-            if(requirementDTO.getAddress() == appearanceDTO.getAddress() || requirementDTO.getAddress()==null){
+            if(requirementDTO.getAddress().equals(appearanceDTO.getAddress())  || requirementDTO.getAddress()==null){
 
-                if(requirementDTO.getHair_color() == appearanceDTO.getHair_color() || requirementDTO.getHair_color() == null){
+                if(requirementDTO.getHair_color().equals(appearanceDTO.getHair_color())  || requirementDTO.getHair_color() == null){
                     return true;
                 }else{
                     return false;

@@ -6,6 +6,7 @@ import org.example.searchingservice.dto.JWTDTO;
 import org.example.searchingservice.dto.RequirementDTO;
 import org.example.searchingservice.requests.AppearanceRequest;
 import org.example.searchingservice.requests.RequirementRequest;
+import org.example.searchingservice.services.AppearanceSortService;
 import org.example.searchingservice.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,12 +24,15 @@ public class MainController {
     private final JWTUtil jwtUtil;
     private final AppearanceRequest appearanceRequest;
     private final RequirementRequest requirementRequest;
+    private final AppearanceSortService sortService;
 
     @Autowired
-    public MainController(JWTUtil jwtUtil, AppearanceRequest appearanceRequest, RequirementRequest requirementRequest) {
+    public MainController(JWTUtil jwtUtil, AppearanceRequest appearanceRequest,
+                          RequirementRequest requirementRequest, AppearanceSortService sortService) {
         this.jwtUtil = jwtUtil;
         this.appearanceRequest = appearanceRequest;
         this.requirementRequest = requirementRequest;
+        this.sortService = sortService;
     }
 
     @GetMapping("/get")
@@ -36,10 +40,11 @@ public class MainController {
         JWTDTO jwtdto = jwtUtil.validateTokenAndRetrieveClaim(jwtUtil.getJWT(request));
 
         RequirementDTO requirementDTO = requirementRequest.getRequirement(jwtdto.getId());
-        List<AppearanceDTO> appearanceDTOList = appearanceRequest.findAllBySex(requirementDTO.getSex());
+        AppearanceDTO[] appearanceDTOList = appearanceRequest.findAllBySex(requirementDTO.getSex());
 
+        List<AppearanceDTO> sortList = sortService.sortByRequirement(appearanceDTOList,requirementDTO);
 
-        return appearanceDTOList;
+        return sortList;
 
     }
 

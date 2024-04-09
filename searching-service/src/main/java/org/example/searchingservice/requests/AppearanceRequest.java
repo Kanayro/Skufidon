@@ -5,6 +5,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,20 +23,20 @@ public class AppearanceRequest {
 
     }
 
-    public List<AppearanceDTO> findAll(){
+    public AppearanceDTO[] findAll(){
 
         RestTemplate restTemplate = new RestTemplate();
         String url = "http://localhost:8081/appearance/getAll";
-        List<AppearanceDTO> appearanceDTOList = restTemplate.getForObject(url,List.class);
+        AppearanceDTO[] appearanceDTOList =  restTemplate.getForObject(url, AppearanceDTO[].class);
         return appearanceDTOList;
 
     }
 
-    public List<AppearanceDTO> findAllBySex(String sex){
+    public AppearanceDTO[] findAllBySex(String sex){
 
         RestTemplate restTemplate = new RestTemplate();
         String url = "http://localhost:8081/appearance/getAll?sex="+sex;
-        List<AppearanceDTO> appearanceDTOList = restTemplate.getForObject(url,List.class);
+        AppearanceDTO[] appearanceDTOList =  restTemplate.getForObject(url, AppearanceDTO[].class);
         return appearanceDTOList;
 
     }
