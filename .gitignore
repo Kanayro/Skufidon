@@ -12,6 +12,7 @@ build/
 *.iws
 *.iml`qq
 .idea
+*.properties
 
 *.ipr
 out/

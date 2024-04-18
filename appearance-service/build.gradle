@@ -26,6 +26,11 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
     implementation 'org.modelmapper:modelmapper:3.2.0'
     implementation 'com.auth0:java-jwt:4.4.0'
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    implementation 'com.amazonaws:aws-java-sdk:1.12.701'
+
+
+
     runtimeOnly 'org.postgresql:postgresql'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
