@@ -2,6 +2,8 @@ package org.example.appearanceservice.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "appearance")
 public class Appearance {
@@ -40,8 +42,11 @@ public class Appearance {
     @JoinColumn(name = "skufmark_id", referencedColumnName = "id")
     private SkufMark skufMark;
 
+    @OneToMany(mappedBy = "appearance")
+    private List<Photo> photos;
+
     public Appearance(int id, String name, String surname, String sex, int age, String address,
-                      String hair_color, int client, Gender gender, SkufMark skufMark) {
+                      String hair_color, int client, Gender gender, SkufMark skufMark, List<Photo> photos) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -52,6 +57,7 @@ public class Appearance {
         this.client = client;
         this.gender = gender;
         this.skufMark = skufMark;
+        this.photos = photos;
     }
 
     public Appearance() {
@@ -135,6 +141,22 @@ public class Appearance {
 
     public void setSkufMark(SkufMark skufMark) {
         this.skufMark = skufMark;
+    }
+
+    public List<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
+    }
+
+    public int getClient() {
+        return client;
+    }
+
+    public void setClient(int client) {
+        this.client = client;
     }
 
     @Override
