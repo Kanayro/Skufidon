@@ -5,6 +5,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.util.IOUtils;
+import org.example.appearanceservice.models.Photo;
 import org.example.appearanceservice.util.Credentials;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,26 +29,25 @@ public class StorageService {
 
     private final AmazonS3 s3;
 
-    private final Credentials credentials;
+    private final PhotoService service;
 
     @Autowired
-    public StorageService(AmazonS3 s3, Credentials credentials) {
+    public StorageService(AmazonS3 s3, PhotoService service) {
         this.s3 = s3;
-        this.credentials = credentials;
+        this.service = service;
     }
 
-    public String uploadObject(MultipartFile file){
+
+    public String uploadObject(MultipartFile file) {
+
         File fileobj = convertMultiPartFileToFile(file);
         String filename = file.getOriginalFilename();
-
-        String file_url = storage_url + filename;
-
-        System.out.println(file_url);
-
         s3.putObject(new PutObjectRequest(bucket_name,filename,fileobj));
         fileobj.delete();
 
-        return "File uploaded :" + filename;
+
+
+        return storage_url + filename;
 
 
     }

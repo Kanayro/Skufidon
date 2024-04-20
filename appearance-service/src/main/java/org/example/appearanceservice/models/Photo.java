@@ -7,12 +7,8 @@ import jakarta.persistence.*;
 public class Photo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
-
-    @Column(name = "url")
-    private String url;
+    @Column(name = "uri")
+    private String uri;
 
     @ManyToOne
     @JoinColumn(name = "appearance_id",referencedColumnName = "id")
@@ -21,26 +17,18 @@ public class Photo {
     public Photo() {
     }
 
-    public Photo(int id, String url, Appearance appearance) {
-        this.id = id;
-        this.url = url;
+    public Photo( String uri, Appearance appearance) {
+        this.uri = uri;
         this.appearance = appearance;
     }
 
-    public int getId() {
-        return id;
+
+    public String getUri() {
+        return uri;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 
     public Appearance getAppearance() {
