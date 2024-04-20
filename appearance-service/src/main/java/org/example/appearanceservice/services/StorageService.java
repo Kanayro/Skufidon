@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -49,6 +50,22 @@ public class StorageService {
 
         return storage_url + filename;
 
+
+    }
+
+    public List<String> uploadObjects(List<MultipartFile> files) {
+
+        List<String> uri = new ArrayList<>();
+
+        for (MultipartFile file : files){
+            File fileobj = convertMultiPartFileToFile(file);
+            String filename = file.getOriginalFilename();
+            s3.putObject(new PutObjectRequest(bucket_name,filename,fileobj));
+            fileobj.delete();
+            uri.add(storage_url+filename);
+        }
+
+        return uri;
 
     }
 

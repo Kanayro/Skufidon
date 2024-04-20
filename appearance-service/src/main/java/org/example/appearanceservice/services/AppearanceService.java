@@ -38,6 +38,12 @@ public class AppearanceService {
 
     }
 
+    public Appearance findByClient(int client_id){
+        Appearance appearance = appearanceRepository.findByClient(client_id)
+                .orElseThrow(AppearanceNotFoundException::new);
+        return appearance;
+    }
+
     @Transactional
     public void delete(int client_id){
         appearanceRepository.deleteAppearanceByClient(client_id);

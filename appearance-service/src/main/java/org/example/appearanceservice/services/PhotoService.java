@@ -1,10 +1,12 @@
 package org.example.appearanceservice.services;
 
 import org.example.appearanceservice.exceptions.PhotoNotFoundException;
+import org.example.appearanceservice.models.Appearance;
 import org.example.appearanceservice.models.Photo;
 import org.example.appearanceservice.repositories.PhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,8 +19,19 @@ public class PhotoService {
         this.photoRepository = photoRepository;
     }
 
-    public void save(Photo photo){
+    @Transactional
+    public void save(String uri, Appearance appearance){
+        Photo photo = new Photo(uri,appearance);
         photoRepository.save(photo);
+    }
+
+    public void savePhotos(List<String> uri,Appearance appearance){
+        Photo photo = new Photo();
+        photo.setAppearance(appearance);
+        for (String i : uri){
+            photo.setUri(i);
+            photoRepository.save(photo);
+        }
     }
 
     public void delete(String uri){
