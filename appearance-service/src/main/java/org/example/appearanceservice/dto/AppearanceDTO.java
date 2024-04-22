@@ -1,6 +1,8 @@
 package org.example.appearanceservice.dto;
 
 
+import java.util.List;
+
 public class AppearanceDTO {
 
     private String name;
@@ -16,6 +18,8 @@ public class AppearanceDTO {
     private String hair_color;
 
     private int client_id;
+
+    private List<PhotoDTO> photos;
 
     public AppearanceDTO() {
     }
@@ -74,5 +78,13 @@ public class AppearanceDTO {
 
     public void setClient_id(int client_id) {
         this.client_id = client_id;
+    }
+
+    public List<PhotoDTO> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<PhotoDTO> photos) {
+        this.photos = photos;
     }
 }

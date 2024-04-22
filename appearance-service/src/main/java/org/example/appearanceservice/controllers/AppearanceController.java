@@ -27,7 +27,6 @@ import java.util.stream.Collectors;
 @RequestMapping("/appearance")
 public class AppearanceController {
 
-
     private final JWTUtil jwtUtil;
     private final AppearanceService appearanceService;
     private final AppearanceMapper mapper;
@@ -38,8 +37,6 @@ public class AppearanceController {
         this.appearanceService = appearanceService;
         this.mapper = mapper;
     }
-
-
 
     @PostMapping("/add")
     public ResponseEntity<HttpStatus> addAppearance(@RequestBody @Valid AppearanceDTO appearanceDTO, BindingResult result, HttpServletRequest request){
@@ -65,7 +62,6 @@ public class AppearanceController {
 
     }
 
-
     @PostMapping("/update")
     public ResponseEntity<HttpStatus> updateAppearance(@RequestBody @Valid AppearanceDTO appearanceDTO, BindingResult result, HttpServletRequest request){
         Appearance appearance = mapper.mapToAppearance(appearanceDTO);
@@ -89,11 +85,15 @@ public class AppearanceController {
 
     }
 
-
     @GetMapping("/{id}")
     public AppearanceDTO getAppearance(@PathVariable("id") int id){
         return mapper.mapToAppearanceDTO(appearanceService.get(id));
 
+    }
+    @GetMapping("/get")
+    public AppearanceDTO getAppearance(HttpServletRequest request){
+        JWTDTO jwtdto = jwtUtil.validateTokenAndRetrieveClaim(jwtUtil.getJWT(request));
+        return mapper.mapToAppearanceDTO(appearanceService.findByClient(jwtdto.getId()));
     }
 
     @GetMapping("/findAll")
@@ -106,9 +106,6 @@ public class AppearanceController {
         return appearanceService.findAllBySex(sex).stream().map(mapper::mapToAppearanceDTO).collect(Collectors.toList());
     }
 
-
-
-
     @GetMapping("/delete")
     public ResponseEntity<HttpStatus> delete(HttpServletRequest request){
         JWTDTO jwtdto = jwtUtil.validateTokenAndRetrieveClaim(jwtUtil.getJWT(request));
@@ -117,9 +114,6 @@ public class AppearanceController {
         return ResponseEntity.ok(HttpStatus.OK);
 
     }
-
-
-
 
     //Exception handlers
 
